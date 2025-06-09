@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +21,57 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.variable} antialiased`}>
+        <header className="w-full sticky top-0 z-30 bg-white shadow-sm flex items-center justify-between px-6 md:px-16 py-3">
+          <div className="flex items-center gap-3">
+            <a href="/">
+              <Image src="/logo Anais.png" alt="Logo Anaïs Blanquet" width={180} height={60} className="h-auto w-[180px] object-contain" />
+            </a>
+          </div>
+          <nav className="flex items-center gap-8">
+            <a href="/" className="text-base font-medium text-black hover:text-orange-500 transition">Accueil</a>
+            <a href="/#mes-services" className="text-base font-medium text-black hover:text-orange-500 transition">Mes services</a>
+            <a href="/travaux-realises" className="text-base font-medium text-black hover:text-orange-500 transition">Travaux réalisés</a>
+            <a href="/a-propos" className="text-base font-medium text-black hover:text-orange-500 transition">A propos</a>
+            <a href="/contact" className="ml-4 inline-block font-bold text-white text-base px-6 py-2 rounded-xl shadow-lg" style={{ background: "linear-gradient(90deg, #a259e6 0%, #ff6a3d 100%)" }}>Contact</a>
+          </nav>
+        </header>
         {children}
+        <footer className="w-full flex flex-col items-center justify-center bg-[#faf9fa] pt-12 pb-2 border-t border-gray-100">
+          <div className="w-full max-w-5xl flex flex-col md:flex-row items-start justify-between gap-8 md:gap-0 px-4 md:px-0">
+            {/* Logo à gauche */}
+            <div className="flex-1 flex justify-center md:justify-start mb-6 md:mb-0 items-start">
+              <a href="/">
+                <Image src="/logo Anais.png" alt="Logo Anaïs Blanquet" width={160} height={60} className="h-auto w-[160px] object-contain" />
+              </a>
+            </div>
+            {/* Liens au centre */}
+            <div className="flex-1 flex flex-col items-start justify-start">
+              <ul className="flex flex-col gap-2 text-base font-medium">
+                <li><a href="/" className="hover:text-[#a259e6]">Accueil</a></li>
+                <li><a href="/a-propos" className="hover:text-[#a259e6]">À propos</a></li>
+                <li><a href="/#mes-services" className="hover:text-[#a259e6]">Services</a></li>
+                <li><a href="/travaux-realises" className="hover:text-[#a259e6]">Travaux réalisés</a></li>
+                <li><a href="/contact" className="flex items-center gap-2 hover:text-[#a259e6]"><span>➡️</span>Contact</a></li>
+              </ul>
+            </div>
+            {/* Réseaux à droite */}
+            <div className="flex-1 flex flex-col items-start md:items-start justify-start md:justify-start gap-0 mt-2">
+              <span className="font-bold text-lg mb-2">Retrouvez-moi sur LinkedIn !</span>
+              <div className="flex flex-col items-center mt-0">
+                <a href="https://www.linkedin.com/in/ana%C3%AFs-blanquet/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center">
+                  <Image src="/logo LinkedIn.png" alt="LinkedIn" width={48} height={48} className="object-contain w-12 h-12" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <div className="w-full flex flex-col items-center justify-center py-4 border-t border-gray-100 bg-white text-gray-500 text-sm">
+          <div className="flex flex-row gap-4 items-center">
+            <span>&copy; {new Date().getFullYear()} Anaïs Blanquet. Tous droits réservés.</span>
+            <a href="/mentions-legales" className="underline hover:text-[#a259e6]">Mentions légales</a>
+          </div>
+        </div>
       </body>
     </html>
   );
